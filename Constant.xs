@@ -2002,6 +2002,7 @@ static double constant( const char* name, int arg )
     r( wxLOCALE_LOAD_DEFAULT );         // locale
 #if WXPERL_W_VERSION_LT( 3, 1, 0 )
     r( wxLOCALE_CONV_ENCODING );        // locale
+#endif
 
 #if WXPERL_W_VERSION_GE( 2, 7, 1 )
     r( wxLayout_Default );
@@ -2846,9 +2847,10 @@ static double constant( const char* name, int arg )
 #if WXPERL_W_VERSION_GE( 2, 7, 2 )
     r( wxTEXT_TYPE_ANY );               // textctrl
 #endif
-
+#if WXPERL_W_VERSION_LT( 3, 1, 0 )
     r( wxTINY_CAPTION_HORIZ );          // miniframe
     r( wxTINY_CAPTION_VERT );           // miniframe
+#endif
     r( wxTIMER_CONTINUOUS );            // timer
     r( wxTIMER_ONE_SHOT );              // timer
     r( wxTOP );                         // sizer layout constraints

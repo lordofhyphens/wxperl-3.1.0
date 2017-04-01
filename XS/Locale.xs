@@ -85,8 +85,8 @@ wxLanguageInfo::GetDescription()
 MODULE=Wx PACKAGE=Wx::Locale
 
 #if WXPERL_W_VERSION_GE( 2, 9, 1 )
-	#define wxPL_LOCALE_CTOR_FLAGS wxLOCALE_LOAD_DEFAULT
-	#define wxPL_LOCALE_CONVERT_ENCODING true
+#define wxPL_LOCALE_CONVERT_ENCODING true
+#define wxPL_LOCALE_CTOR_FLAGS wxLOCALE_LOAD_DEFAULT
 #else
 #define wxPL_LOCALE_CTOR_FLAGS wxLOCALE_LOAD_DEFAULT|wxLOCALE_CONV_ENCODING
 #define wxPL_LOCALE_CONVERT_ENCODING false
@@ -115,10 +115,16 @@ newLong( name, shorts = NULL, locale = NULL, loaddefault = true, convertencoding
         WXSTRING_INPUT( locale_tmp, const char*, ST(2) );
         locale = locale_tmp.c_str();
     }
-
+#if WXPERL_W_VERSION_GE( 3, 1, 0 )
+    RETVAL = new wxLocale( name, shorts,
+        ( locale && wxStrlen( locale ) ) ? locale : NULL,
+        loaddefault );
+#endif
+#if WXPERL_W_VERSION_LT( 3, 1, 0 )
     RETVAL = new wxLocale( name, shorts,
         ( locale && wxStrlen( locale ) ) ? locale : NULL,
         loaddefault, convertencoding );
+#endif
   OUTPUT:
     RETVAL
 
@@ -244,10 +250,21 @@ FindLanguageInfo( name )
     if( ST(0) != NULL )
     	wxPli_object_set_deleteable( aTHX_ ST(0), false );
 
+#if WXPERL_W_VERSION_GE( 3, 1, 0 )
+
 bool
-wxLocale::Init( language, flags = wxLOCALE_LOAD_DEFAULT|wxLOCALE_CONV_ENCODING )
+wxLocale::Init( language, flags = wxLOCALE_LOAD_DEFAULT )
     int language
     int flags
+
+#else
+
+bool
+wxLocale::Init( language, flags = wxLOCALE_LOAD_DEFAULT|wxLOCALE_CONV_ENCODING)
+    int language
+    int flags
+
+#endif 
 
 const wxLanguageInfo*
 GetLanguageInfo( language )

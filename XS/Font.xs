@@ -416,14 +416,22 @@ void
 wxFont::SetPointSize( pointsize )
     int pointsize
 
+#if WXPERL_W_VERSION_LT( 3, 1, 0 )
+
 void
 wxFont::SetStyle( style )
     int style
+
+#endif 
 
 void
 wxFont::SetUnderlined( underlined )
     bool underlined
 
+#if WXPERL_W_VERSION_LT( 3, 1, 0 )
+
 void
 wxFont::SetWeight( weight )
     int weight
+
+#endif
