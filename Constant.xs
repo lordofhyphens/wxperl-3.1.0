@@ -2000,6 +2000,7 @@ static double constant( const char* name, int arg )
     r( wxLeftOf );                      // layout constraints
 
     r( wxLOCALE_LOAD_DEFAULT );         // locale
+#if WXPERL_W_VERSION_LT( 3, 1, 0 )
     r( wxLOCALE_CONV_ENCODING );        // locale
 
 #if WXPERL_W_VERSION_GE( 2, 7, 1 )

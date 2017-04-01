@@ -1113,7 +1113,7 @@ public:
 
     bool SetPlValue( wxColourPropertyValue* col, int flags = wxPG_SETVAL_REFRESH_EDITOR )
       %code{%
-            wxVariant value = wxVariant(*col);
+            wxAny value = wxAny(*col);
             THIS->SetValue(value, NULL, flags );
             RETVAL = true;
       %};
@@ -1146,7 +1146,7 @@ public:
     bool SetPlValue( wxColour* col, int flags = wxPG_SETVAL_REFRESH_EDITOR )
       %code{%
             if( col->IsOk() ) {
-                wxVariant value = wxVariant(*col);
+                wxAny value = wxAny(*col);
                 THIS->SetValue(value, NULL, flags );
                 RETVAL = true;
             } else {
