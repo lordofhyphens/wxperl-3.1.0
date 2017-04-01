@@ -174,8 +174,6 @@ public:
 
     const wxPGEditor__parsed_nodelete* GetEditorClass() const;
 
-    wxUint32 GetFlags() const;
-
     wxPropertyGrid* GetGrid() const;
 
     wxPropertyGrid* GetGridIfDisplayed() const;
